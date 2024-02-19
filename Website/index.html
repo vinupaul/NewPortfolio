@@ -13,15 +13,15 @@
             <div class="container">
                 <nav>
                     <img src="images/logo1.png" class="logo">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <i class="fa-solid fa-xmark"></i>
+                    <ul id="sidemenu">
+                        <li><a href="#header">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <i class="fas fa-solid fa-xmark" onclick="closemenu()"></i>
                     </ul>
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fas fa-solid fa-bars" onclick="openmenu()"></i>
                 </nav>
                 <div class="header-text">
                     <p>Full Stack Developer</p>
@@ -38,7 +38,7 @@
                     <div class="about-col-2">
                         <h1 class="sub-title">About Me</h1>
                         <p>
-                            Add text here
+                            Developer with 4.3 years of experience of working in the computer software industry. Having worked with clients like Nike, Williams Sonoma, Marriott, Mazda and skilled in JavaScript, ReactJS, CSS and HTML. Also, having a passion for biking and vlogging that fuels me.
                         </p>
 
                         <div class="tab-titles">
@@ -128,7 +128,7 @@
                 <h1 class="sub-title">My Work</h1>
                 <div class="work-list">
                     <div class="work">
-                        <img src="/Website/Images/work-1.png">
+                        <img src="images/1.png">
                         <div class="layer">
                             <h3>Social Media App</h3>
                             <p>This app is for helping people to find their
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                     <div class="work">
-                        <img src="/Website/Images/work-2.png">
+                        <img src="images/2.png">
                         <div class="layer">
                             <h3>A portfolio that I have made.</h3>
                             <p>This took me a few days.</p>
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <div class="work">
-                        <img src="/Website/Images/work-3.png">
+                        <img src="images/3.png">
                         <div class="layer">
                             <h3>Just some text</h3>
                             <p>This is a joke</p>
@@ -174,12 +174,13 @@
                         <a href="/Website/Images/Vinu Paul_USA_Resume.pdf" class="btn btn2">Download CV</a>
                     </div>
                     <div class="contact-right">
-                    <form>
+                    <form name="submit-to-google-sheet">
                         <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="email" name="EMail" placeholder="Your Email" required>
+                        <input type="email" name="Email" placeholder="Your Email" required>
                         <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
                         <button type="Submit" class="btn btn2">Submit</button>
                     </form>
+                    <span id="msg"></span>
                     </div>
                 </div>
             </div>
@@ -206,6 +207,41 @@ function opentab(tabname){
 }
 
 </script>
+
+
+<script>
+
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu(){
+        sidemenu.style.right="0";
+    }
+    function closemenu(){
+        sidemenu.style.right="-200px";
+    }
+
+</script>
+
+
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxPbSFv6Jb_RbjUg0ya7m3FeF3MN2xj5lijEZViJm2ujN6vjvgparMymIrF1Lau9-Rr6g/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Your Details Message sent sucessfully"
+            setTimeout(function(){
+                msg.innerHTML=""
+            },1000) 
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+
 
     </body>
 </html>
